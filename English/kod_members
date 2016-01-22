@@ -1,0 +1,45 @@
+<%@page import="java.util.*" %>
+<%@page import="com.english.Database.UsersWorker"%>
+
+<b>Members</b>
+
+<table>
+<tr>
+<th>user_id</th>
+<th>user_email</th>
+<th>user_password</th>
+</tr> 
+<%
+  List<String> usersContainer = UsersWorker.GetUsers();
+  int id = 0;
+  String box = null;
+
+  Iterator<String> it = usersContainer.iterator();
+
+  while (it.hasNext()) {
+
+      out.print("<tr>");
+      
+      int user_id = Integer.parseInt(it.next());
+      out.print("<td>" + user_id + "</td>");
+      
+      for (int i = 0; i < 2; ++i) {
+    	  
+          out.print("<td>");
+          
+          if(i==0) {
+          
+          	  %><a href="Index.jsp?subpage=6"><% out.print(it.next()); %> </a> <%
+          } else {
+        	  
+        	  out.print(it.next());
+          }
+          out.print("</td>");
+  }
+  out.print("<td>");
+  out.print("</td>");
+  out.print("</tr>");
+ }
+%>
+ 
+</table>
