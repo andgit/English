@@ -75,7 +75,7 @@
 		<%
 	}
 	%>
-
+//session
 		<% if(session.getAttribute("logged")==null || session.getAttribute("logged").equals("offline")) { %>
 			<form action="LogInServlet" method="post">
 				<br>
