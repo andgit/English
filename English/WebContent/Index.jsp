@@ -1,6 +1,7 @@
 <%@ page import="java.sql.*, com.english.Database.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="com.english.GlobalData"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,10 +13,10 @@
 <a href="Index.jsp?subpage=1">Homepage</a>
 <a href="Index.jsp?subpage=2">Members</a>
 <a href="Index.jsp?subpage=3">Join Us</a>
-<a href="Index.jsp?subpage=4">Log In</a>
+<!-- <a href="Index.jsp?subpage=4">Log In</a> -->
 <a href="Index.jsp?subpage=5">How to start</a>
 <!--<a href="Index.jsp?subpage=5">Profile</a> ZAKOMENTOWANE nie ma tego w glownym menu-dostajemy sie przez Members.jsp-->
-<a href="Index.jsp?subpage=7">Cockpit</a>
+<a href="Index.jsp?subpage=7">My Profile</a>
 <br>
 
 <%
@@ -44,11 +45,11 @@
 				<jsp:include page="Registration.jsp" />
 			<%
 		break;
-		case 4:
-			%>
-				<jsp:include page="LogIn.jsp" />
-			<%
-		break;
+		//case 4:
+			
+				//<jsp:include page="LogIn.jsp" />
+			
+		//break;
 		case 5:
 			%>
 				<jsp:include page="HowTo.jsp" />
@@ -61,7 +62,7 @@
 		break;
 		case 7:
 			%>
-				<jsp:include page="Cockpit.jsp" />
+				<jsp:include page="MyProfile.jsp" />
 			<%
 		break;
 		default:
@@ -75,8 +76,8 @@
 		<%
 	}
 	%>
-//session
-		<% if(session.getAttribute("logged")==null || session.getAttribute("logged").equals("offline")) { %>
+<!-- SESSION SECTION -->
+		<% if(session.getAttribute("logged")==null || session.getAttribute("logged").equals(GlobalData.sessionOffLine)) { %>
 			<form action="LogInServlet" method="post">
 				<br>
 				email: <input type="text" name="account_email"/>
@@ -84,7 +85,7 @@
 				<input type="submit" value="Log in"/>
 				</br>
 			</form>
-		<% } else if(session.getAttribute("logged").equals("online")) { %>
+		<% } else if(session.getAttribute("logged").equals(GlobalData.sessionOnline)) { %>
 			<form action="LogOutServlet" method="post">
 				<br>Logged as: 
 				<% if(session.getAttribute("account_type").equals("customer")) { %>
@@ -95,9 +96,9 @@
 				<br><input type="submit" value="Log out"/>
 			</form>
 		<% } else if(session.getAttribute("logged").equals("ErrorEmailPass")) {
-			session.setAttribute("logged", "offline");
-			session.setAttribute("account_type", "offline");
-			session.setAttribute("email", "offline");
+			session.setAttribute("logged", GlobalData.sessionOffLine);
+			session.setAttribute("account_type", GlobalData.sessionOffLine);
+			session.setAttribute("email", GlobalData.sessionOffLine);
 		%>
 			<form action="LogInServlet" method="post">
 				<br>Wrong email or password:-(</br>

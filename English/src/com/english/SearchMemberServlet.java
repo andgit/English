@@ -36,16 +36,13 @@ public class SearchMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
 		
-		String parameterEmail = request.getParameter("user_email");
+		String requestParameterEmail = request.getParameter("userEmail");
 
-		if(parameterEmail != null) {
+		if(requestParameterEmail != null) {
 			
-			String user_id = "" + UsersWorker.GetUserByEmail(parameterEmail);
-			GlobalFunctions.DEBUG("uu=" + user_id);
-    		request.setAttribute("user_id", user_id);
+			String user_id = "" + UsersWorker.GetUserByEmail(requestParameterEmail);
+    		request.setAttribute("account_user_id", user_id);
     		getServletContext().getRequestDispatcher("/Index.jsp?subpage=2").forward(request, response);
 		}
 	}

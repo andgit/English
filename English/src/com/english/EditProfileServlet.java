@@ -36,25 +36,26 @@ public class EditProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
 		
-		String parameterUserId = request.getParameter("userId");
-		String parameterUserEmail = request.getParameter("userEmail");
-		String parameterUserPassword = request.getParameter("userPassword");
+		int parameterUserId = Integer.parseInt(request.getParameter("userId"));
+		String parameterUserName = request.getParameter("userName");
+		String parameterUserSurname = request.getParameter("userSurname");
+		String parameterUserCountry = request.getParameter("userCountry");
+		String parameterUserCity = request.getParameter("userCity");
+		int parameterUserEnglishLevel = Integer.parseInt(request.getParameter("userEnglishLevel"));
+		String parameterUserSkype = request.getParameter("userSkype");
+		boolean parameterUserSex = Boolean.parseBoolean(request.getParameter("userSex"));
 		
-		/*GlobalFunctions.DEBUG("parameterUserId=" + parameterUserId);
-		GlobalFunctions.DEBUG("parameterUserEmail=" + parameterUserEmail);
-		GlobalFunctions.DEBUG("parameterUserPassword=" + parameterUserPassword);*/
-		
-		if(parameterUserId != null && parameterUserEmail != null && parameterUserPassword != null) {
+		//int parameterAccountId = Integer.parseInt(request.getParameter("accountId"));
+		String parameterAccountEmail = request.getParameter("accountEmail");
+		String parameterAccountPassword = request.getParameter("accountPassword");
+		//String parameterAccountRegistrationDate = request.getParameter("accountRegistrationDate");
+				
+		//if(parameterUserId != null && parameterUserEmail != null && parameterUserPassword != null) {
 			
-			UsersWorker.UpdateUser(Integer.parseInt(parameterUserId), parameterUserEmail, parameterUserPassword);
-    		request.setAttribute("user_id", parameterUserId);
-    		request.setAttribute("user_email", parameterUserEmail);
-    		request.setAttribute("user_password", parameterUserPassword);
-    		getServletContext().getRequestDispatcher("/Index.jsp?subpage=6").forward(request, response);
-		}
+			UsersWorker.UpdateUser(parameterUserId, parameterUserName, parameterUserSurname, parameterUserCountry, parameterUserCity, parameterUserEnglishLevel, parameterUserSkype, parameterUserSex, parameterAccountEmail, parameterAccountPassword);
+    		getServletContext().getRequestDispatcher("/Index.jsp?subpage=7").forward(request, response);
+		//}
 	}
 
 }

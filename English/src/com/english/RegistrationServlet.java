@@ -29,23 +29,27 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);//chyba to nie jest potrzebne-upewnic sie i usunac!!!
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String sex = request.getParameter("sex");//not used for now
+		String name = request.getParameter("name");
+		String surname = request.getParameter("surname");
+		String country = request.getParameter("country");
+		String city = request.getParameter("city");
+		int englishLevel = Integer.parseInt(request.getParameter("englishLevel"));
+		String skype = request.getParameter("skype");
+		boolean sex = Boolean.parseBoolean(request.getParameter("sex"));//check if it`s correct!?
 		
 		if(email == null || GlobalFunctions.isEmailAddressValid(email) == false) {
 			
-			request.setAttribute("action", "Wrong email address.");
+			request.setAttribute("RegistrationMessageAttribute", "Wrong email address.");
 			getServletContext().getRequestDispatcher("/Index.jsp?subpage=3").forward(request, response);
 			
 		} else {
 			
-			UsersWorker.Insert(email, password);
+			UsersWorker.AddUser(name, surname, country, city, englishLevel, skype, sex, email, password);
 			
-			request.setAttribute("action", "success");
+			request.setAttribute("RegistrationMessageAttribute", "successfulRegistration");
 			getServletContext().getRequestDispatcher("/Index.jsp?subpage=3").forward(request, response);
 		}
 	}

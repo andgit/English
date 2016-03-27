@@ -38,6 +38,15 @@ public class ProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		
+		String memberUserId = request.getParameter("member_user_id");
+		
+		if(memberUserId != null) {
+			
+			request.setAttribute("member_user_id", memberUserId);
+			getServletContext().getRequestDispatcher("/Index.jsp?subpage=6").forward(request, response);
+		}
+		/*
 		//to nie jest jeszcze skonczone-nie dziala jeszcze poprawnie
 	    for(int i=0;i<2;++i) {//narazie sa 2 wiersze (uzytkownikow) w bazie danych wiec dalem 2
 	    	
@@ -51,6 +60,7 @@ public class ProfileServlet extends HttpServlet {
 	        }
 	        break;
 	    }
+	    */
 		/*String user_id = request.getParameter("user_id");
 		request.setAttribute("user_id", user_id);
 		getServletContext().getRequestDispatcher("/Index.jsp?subpage=6").forward(request, response);*/
